@@ -119,7 +119,7 @@ public class PDFCourier2Text extends PDFTextStripper {
         // + 1;
         if (textPositions.size() > 0) {
             TextPosition textPosition = textPositions.get(0);
-            float fontSizeInPt = textPosition.getHeight();  // TODO: This currently refers to maxHeight not inbuilt fontSizeInPt
+            float fontSizeInPt = textPosition.getHeight();  // FIXME: This currently refers to maxHeight not inbuilt fontSizeInPt
 
             if (fontSizeHasIncreasedAboveThreshold(fontSizeInPt) || fontSizeIsStillAboveThreshold(fontSizeInPt)) {
                 if (currentTitle.isEmpty()) {
