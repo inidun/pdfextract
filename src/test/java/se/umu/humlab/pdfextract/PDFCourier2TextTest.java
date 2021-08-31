@@ -51,24 +51,4 @@ public class PDFCourier2TextTest {
 
     }
 
-
-    @Test
-    public void theAnfags() throws IOException {
-        PDFCourier2Text stripper = new PDFCourier2Text(5.5f, 8);
-
-        List<String> pages = stripper.extractText("src/test/resources/014255engo.pdf");
-        List<List<PDFCourier2Text.TitleInfo>> titles = stripper.getTitles();
-
-        String page_text = pages.get(35);
-        List<PDFCourier2Text.TitleInfo> page_titles = titles.get(35);
-
-        assertEquals("Number of titles", 1, page_titles.size());
-        assertTrue("Title start", page_titles.get(0).title.startsWith("The rubber man"));
-
-        int title_position = page_text.indexOf("The rubber man");
-
-        assertTrue("Title position upper", page_titles.get(0).position <= title_position);
-        assertTrue("Title position lower", page_titles.get(0).position > title_position - 10);
-
-    }
 }
