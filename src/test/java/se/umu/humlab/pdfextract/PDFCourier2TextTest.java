@@ -16,8 +16,8 @@ public class PDFCourier2TextTest {
         stripper.extractText("src/test/resources/012656engo.pdf");
         List<List<PDFCourier2Text.TitleInfo>> titles = stripper.getTitles();
         assertEquals(35, titles.size());
-        assertTrue(titles.get(2).get(0).title.contains("Japanese"));
-        assertEquals(114, titles.get(2).get(0).position);
+        assertTrue(titles.get(2).get(3).title.contains("Japanese"));
+        assertEquals(114, titles.get(2).get(3).position);
     }
 
     @Test
@@ -46,6 +46,25 @@ public class PDFCourier2TextTest {
 
         int title_position = page_text.indexOf("The rubber man");
 
+        assertTrue("Title position upper", page_titles.get(0).position <= title_position);
+        assertTrue("Title position lower", page_titles.get(0).position > title_position - 10);
+
+    }
+
+    @Test
+    public void theMeteors() throws IOException {
+        PDFCourier2Text stripper = new PDFCourier2Text(5.5f, 8);
+
+        List<String> pages = stripper.extractText("src/test/resources/068057engo.pdf");
+        List<List<PDFCourier2Text.TitleInfo>> titles = stripper.getTitles();
+
+        List<PDFCourier2Text.TitleInfo> page_titles = titles.get(27);
+        assertEquals("Number of titles", 2, page_titles.size());
+        assertTrue("Title start", page_titles.get(0).title.startsWith("WHERE THE SKY"));
+        assertTrue("Title start", page_titles.get(1).title.startsWith("METEORS"));
+
+        String page_text = pages.get(27);
+        int title_position = page_text.indexOf("WHERE THE SKY");
         assertTrue("Title position upper", page_titles.get(0).position <= title_position);
         assertTrue("Title position lower", page_titles.get(0).position > title_position - 10);
 
